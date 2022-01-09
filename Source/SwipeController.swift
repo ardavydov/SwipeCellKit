@@ -311,7 +311,7 @@ class SwipeController: NSObject {
     }
     
     func targetState(forVelocity velocity: CGPoint) -> SwipeState {
-        guard let actionsView = swipeable?.actionsView else { return .center }
+        guard let actionsView = swipeable?.actionsView, !(actionsView.options.automaticallyResetToCenter ?? false) else { return .center }
         
         switch actionsView.orientation {
         case .left:
@@ -461,8 +461,8 @@ extension SwipeController: SwipeActionsViewDelegate {
     
     func hideSwipe(animated: Bool, completion: ((Bool) -> Void)? = nil) {
         guard var swipeable = self.swipeable, let actionsContainerView = self.actionsContainerView else { return }
-        guard swipeable.state == .left || swipeable.state == .right else { return }
         guard let actionView = swipeable.actionsView else { return }
+        guard swipeable.state == .left || swipeable.state == .right || actionView.options.automaticallyResetToCenter ?? false else { return }
         
         swipeable.state = .animatingToCenter
         

@@ -44,6 +44,9 @@ public struct SwipeOptions {
     
     /// The amount of space, in points, between the button image and the button title.
     public var buttonSpacing: CGFloat?
+
+    /// The buttons stick behaviour to center.
+    public var automaticallyResetToCenter: Bool?
     
     /// Constructs a new `SwipeOptions` instance with default options.
     public init() {}
